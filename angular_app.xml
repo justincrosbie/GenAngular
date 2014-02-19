@@ -1,0 +1,424 @@
+<app name="loyalty3" title="Loyalty 3.0">
+	<description>Loyalty 3.0 goes beyond traditional Loyalty systems to provide a more compelling and immersive experience for your customers, by leveraging state-of-the-art gamification techniques</description>
+	<database name="loyalty3" url="jc:jc@ds063307.mongolab.com:63307/jcajs">
+	</database>
+	<menus>
+		<menu name="guestmanagement" title="Guest Management" link="guestmanagement">
+			<description>Guest Management is cool!</description>
+			<main-menu>
+				<menu-item name="customers" title="Customers" link="customers"/>
+				<menu-item name="sites" title="Sites" link="sites"/>
+				<menu-item name="companys" title="Companys" link="companys"/>
+				<menu-item name="persons" title="Persons" link="persons"/>
+			</main-menu>
+			<admin-menu>
+				<menu-item name="subscriptions" title="Subscriptions" link="subscriptions"/>
+				<menu-item name="currencys" title="Currencys" link="currencys"/>
+				<menu-item name="countrys" title="Countrys" link="countrys"/>
+				<menu-item name="titles" title="Titles" link="titles"/>
+			</admin-menu>
+		</menu>
+		<menu name="bookingmanagement" title="Booking Management" link="bookingmanagement">
+			<description>In Booking Management, you can administer the raw records entering the application</description>
+			<main-menu>
+				<menu-item name="rawcompanys" title="Raw Companys" link="rawcompanys"/>
+				<menu-item name="rawpersons" title="Raw Persons" link="rawpersons"/>
+				<menu-item name="bookings" title="Bookings" link="bookings"/>
+				<menu-item name="revenues" title="Revenues" link="revenues"/>
+			</main-menu>
+			<admin-menu>
+				<menu-item name="bookingtypes" title="Booking Types" link="bookingtypes"/>
+				<menu-item name="bookingstatuss" title="Booking Statuses" link="bookingstatuss"/>
+				<menu-item name="ratecodes" title="Rate Codes" link="ratecodes"/>
+				<menu-item name="marketcodes" title="Market Codes" link="marketcodes"/>
+				<menu-item name="channels" title="Channels" link="channels"/>
+				<menu-item name="sobs" title="Sources of Business" link="sobs"/>
+				<menu-item name="roomtypes" title="Room Types" link="roomtypes"/>
+				<menu-item name="rooms" title="Rooms" link="rooms"/>
+				<menu-item name="paymenttypes" title="Payment Types" link="paymenttypes"/>
+				<menu-item name="revenuecodes" title="Revenue Codes" link="revenuecodes"/>
+				<menu-item name="datasourcetypes" title="Data Source Types" link="datasourcetypes"/>
+				<menu-item name="datasources" title="Data Sources" link="datasources"/>
+			</admin-menu>
+		</menu>
+		<menu name="loyalty" title="Loyalty Management" link="loyalty">
+			<description>Loyalty 3.0 goes beyond traditional Loyalty systems to provide a more compelling and immersive experience for your customers, by leveraging state-of-the-art gamification techniques</description>
+			<main-menu>
+				<menu-item name="loyaltyMembers" title="Members" link="loyaltyMembers"/>
+				<menu-item name="loyaltyPoints" title="Points" link="loyaltyPoints"/>
+				<menu-item name="loyaltyTransactions" title="Transactions" link="loyaltyTransactions"/>
+				<menu-item name="loyaltyStatements" title="Statements" link="loyaltyStatements"/>
+				<menu-item name="loyaltyReports" title="Reports" link="loyaltyReports"/>
+			</main-menu>
+			<admin-menu>
+				<menu-item name="loyaltySchemes" title="Schemes" link="loyaltySchemes"/>
+				<menu-item name="loyaltyReports" title="Reports Config" link="loyaltyReports"/>
+			</admin-menu>
+		</menu>
+	</menus>
+	<models>
+		<model name="customer" title="Customer" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+		</model>
+		<model name="site" title="Site" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" sort="true" search="true"/>
+			<field name="latitude" title="Latitude" type="String"/>
+			<field name="longitude" title="Longitude" type="String"/>
+		</model>
+		<model name="datasourcetype" title="Data Source Type" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+		</model>
+		<model name="datasource" title="Data Source" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="datasourcetype" title="Type" type="ref" ref-obj="datasourcetype" list="true" search="true"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+			<field name="connectstr" title="Connect String" type="String"/>
+			<field name="username" title="Username" type="String"/>
+			<field name="password" title="Password" type="String"/>
+		</model>
+		<model name="subscription" title="Subscription" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="rate" title="Rate" type="String"/>
+		</model>
+		<model name="title" title="Title" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+		</model>
+		<model name="country" title="Country" dropdown="search" min-searchlength="1">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="iso" title="ISO Code" type="String" list="true" sort="true" search="true"/>
+			<field name="idc" title="IDC" type="String" list="true"/>
+		</model>
+		<model name="currency" title="Currency" dropdown="search" min-searchlength="1">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="iso" title="ISO Code" type="String" list="true" sort="true" search="true"/>
+			<field name="symbol" title="Symbol" type="String" list="true"/>
+			<field name="exchangerate" title="Exchange Rate" type="Number" list="true"/>
+		</model>
+		<model name="bookingstatus" title="Booking Status" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="bookingtype" title="Booking Type" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="ratecode" title="Rate Code" dropdown="search" min-searchlength="1">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="marketcode" title="Market Code" dropdown="search" min-searchlength="1">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="channel" title="Channel" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="sob" title="Source of Business" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="roomtype" title="Room Type" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="room" title="Room" dropdown="search" min-searchlength="1">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="roomtype" title="Type" type="ref" ref-obj="roomtype"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="rawcompany" title="Raw Company" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+				</tab>
+				<tab name="contact" title="Contact Details">
+					<field name="email" title="Email" type="String" form-type="email"/>
+					<field name="phone" title="Home Phone" type="String"/>
+					<field name="address1" title="Home Address1" type="String"/>
+					<field name="address2" title="Home Address2" type="String"/>
+					<field name="address3" title="Home Address3" type="String"/>
+					<field name="suburb" title="Home Suburb" type="String"/>
+					<field name="city" title="Home City" type="String"/>
+					<field name="postcode" title="Home Post Code" type="String"/>
+					<field name="country" title="Home Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="other" title="Other Details">
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+		
+		<model name="rawperson" title="Raw Person" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="title" title="Title" type="ref" ref-obj="title" list="true" sort="true"/>
+					<field name="firstname" title="First Name" type="String" list="true" sort="true" search="true"/>
+					<field name="middlename" title="Middle Name" type="String" list="true" sort="true" search="true"/>
+					<field name="lastname" title="Last Name" type="String" list="true" sort="true" search="true"/>
+					<field name="gender" title="Gender" type="Number" form-type="radio" form-options="1:Male,2:Female"/>
+					<field name="contactable" title="Can Contact" type="Boolean" form-type="checkbox" form-options="true:Contactable,false:Not Contactable"/>
+					<field name="dob" title="Date of Birth" type="Date"/>
+				</tab>
+				<tab name="homecontact" title="Home Contact Details">
+					<field name="email" title="Email" type="String" form-type="email"/>
+					<field name="homephone" title="Home Phone" type="String"/>
+					<field name="homeaddress1" title="Home Address1" type="String"/>
+					<field name="homeaddress2" title="Home Address2" type="String"/>
+					<field name="homeaddress3" title="Home Address3" type="String"/>
+					<field name="homesuburb" title="Home Suburb" type="String"/>
+					<field name="homecity" title="Home City" type="String"/>
+					<field name="homepostcode" title="Home Post Code" type="String"/>
+					<field name="homecountry" title="Home Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="workcontact" title="Work Details">
+					<field name="company" title="Company" type="ref" ref-obj="company" list="true" search="true"/>
+					<field name="workphone" title="Work Phone" type="String"/>
+					<field name="workaddress1" title="Work Address1" type="String"/>
+					<field name="workaddress2" title="Work Address2" type="String"/>
+					<field name="workaddress3" title="Work Address3" type="String"/>
+					<field name="worksuburb" title="Work Suburb" type="String"/>
+					<field name="workcity" title="Work City" type="String"/>
+					<field name="workpostcode" title="Work Post Code" type="String"/>
+					<field name="workcountry" title="Work Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="other" title="Other Details">
+					<field name="rawcompany" title="Company" type="ref" ref-obj="rawcompany" list="true" search="true"/>
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+					<field name="datasource" title="Data Source" type="ref" ref-obj="datasource" list="true" search="true"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+
+		<model name="booking" title="Booking" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+					<field name="status" title="Status" type="ref" ref-obj="bookingstatus" list="true" search="true"/>
+					<field name="type" title="Type" type="ref" ref-obj="bookingtype" list="true" search="true"/>
+					<field name="datebooked" title="Date Booked" type="Date" list="true" sort="true"/>
+					<field name="start" title="Start Date" type="Date"/>
+					<field name="end" title="End Date" type="Date"/>
+					<field name="room" title="Room" type="ref" ref-obj="room"/>
+					<field name="comments" title="Comments" type="String"/>
+				</tab>
+				<tab name="codes" title="Codes">
+					<field name="ratecode" title="Rate Code" type="ref" ref-obj="ratecode"/>
+					<field name="marketcode" title="Market Code" type="ref" ref-obj="marketcode"/>
+					<field name="channel" title="Channel" type="ref" ref-obj="channel"/>
+					<field name="sob" title="Source of Business" type="ref" ref-obj="sob"/>
+					<field name="person" title="Person" type="ref" ref-obj="rawperson"/>
+					<field name="company" title="Company" type="ref" ref-obj="rawcompany"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+					<field name="datasource" title="Datasource" type="ref" ref-obj="datasource"/>
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+		
+		<model name="paymenttype" title="Payment Type" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="revenuetype" title="Revenue Type" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="revenuecode" title="Revenue Code" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="revenuetype" title="Type" type="ref" ref-obj="revenuetype"/>
+			<field name="site" title="Site" type="ref" ref-obj="site"/>
+			<field name="datasource" title="Data Source" type="ref" ref-obj="datasource"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="revenue" title="Revenue" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="code" title="Code" type="String"/>
+					<field name="datespent" title="Date Spent" type="Date" list="true" sort="true"/>
+					<field name="comments" title="Comments" type="String"/>
+					<field name="amount" title="Amount" type="Number"/>
+					<field name="quantity" title="Quantity" type="Number"/>
+					<field name="currency" title="Currency" type="ref" ref-obj="currency"/>
+				</tab>
+				<tab name="codes" title="Codes">
+					<field name="booking" title="Booking" type="ref" ref-obj="booking"/>
+					<field name="paymenttype" title="Payment Type" type="ref" ref-obj="paymenttype"/>
+					<field name="revenuecode" title="Revenue Code" type="ref" ref-obj="revenuecode"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+					<field name="datasource" title="Datasource" type="ref" ref-obj="datasource"/>
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+		
+		<model name="company" title="Company" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+				</tab>
+				<tab name="contact" title="Contact Details">
+					<field name="email" title="Email" type="String" form-type="email"/>
+					<field name="phone" title="Home Phone" type="String"/>
+					<field name="address1" title="Home Address1" type="String"/>
+					<field name="address2" title="Home Address2" type="String"/>
+					<field name="address3" title="Home Address3" type="String"/>
+					<field name="suburb" title="Home Suburb" type="String"/>
+					<field name="city" title="Home City" type="String"/>
+					<field name="postcode" title="Home Post Code" type="String"/>
+					<field name="country" title="Home Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="other" title="Other Details">
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+		
+		<model name="person" title="Person" dropdown="search" min-searchlength="3">
+			<tabs>
+				<tab name="main" title="Main Details">
+					<field name="title" title="Title" type="ref" ref-obj="title" list="true" sort="true"/>
+					<field name="firstname" title="First Name" type="String" list="true" sort="true" search="true"/>
+					<field name="middlename" title="Middle Name" type="String" list="true" sort="true" search="true"/>
+					<field name="lastname" title="Last Name" type="String" list="true" sort="true" search="true"/>
+					<field name="gender" title="Gender" type="Number" form-type="radio" form-options="1:Male,2:Female"/>
+					<field name="contactable" title="Can Contact" type="Boolean" form-type="checkbox" form-options="true:Contactable,false:Not Contactable"/>
+					<field name="dob" title="Date of Birth" type="Date"/>
+				</tab>
+				<tab name="homecontact" title="Home Contact Details">
+					<field name="email" title="Email" type="String" form-type="email"/>
+					<field name="homephone" title="Home Phone" type="String"/>
+					<field name="homeaddress1" title="Home Address1" type="String"/>
+					<field name="homeaddress2" title="Home Address2" type="String"/>
+					<field name="homeaddress3" title="Home Address3" type="String"/>
+					<field name="homesuburb" title="Home Suburb" type="String"/>
+					<field name="homecity" title="Home City" type="String"/>
+					<field name="homepostcode" title="Home Post Code" type="String"/>
+					<field name="homecountry" title="Home Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="workcontact" title="Work Details">
+					<field name="company" title="Company" type="ref" ref-obj="company" list="true" search="true"/>
+					<field name="workphone" title="Work Phone" type="String"/>
+					<field name="workaddress1" title="Work Address1" type="String"/>
+					<field name="workaddress2" title="Work Address2" type="String"/>
+					<field name="workaddress3" title="Work Address3" type="String"/>
+					<field name="worksuburb" title="Work Suburb" type="String"/>
+					<field name="workcity" title="Work City" type="String"/>
+					<field name="workpostcode" title="Work Post Code" type="String"/>
+					<field name="workcountry" title="Work Country" type="ref" ref-obj="country"/>
+				</tab>
+				<tab name="other" title="Other Details">
+					<field name="customer" title="Customer" type="ref" ref-obj="customer" list="true" search="true"/>
+					<field name="site" title="Site" type="ref" ref-obj="site" list="true" search="true"/>
+				</tab>
+			</tabs>
+		</model>
+		
+		<model name="loyaltyScheme" title="Loyalty Scheme" dropdown="nosearch">
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+			<field name="duration" title="Duration" type="Number" form-type="radio" form-options="1:1 Month,2:1 Year,3:2 Years"/>
+		</model>
+
+		<model name="loyaltyMember" title="Loyalty Member" dropdown="search" min-searchlength="3">
+			<field name="loyaltyScheme" title="Scheme" type="ref" ref-obj="loyaltyScheme" list="true" sort="true" search="true"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="person" title="Person" type="ref" ref-obj="person"/>
+			<field name="isactive" title="Is Active" type="Boolean" form-type="checkbox" form-options="true:Active,false:Inactive"/>
+			<field name="start" title="Start Date" type="Date"/>
+			<field name="end" title="End Date" type="Date"/>
+			<field name="password" title="Password" type="String" form-type="password"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="loyaltyPoint" title="Loyalty Point" dropdown="search" min-searchlength="1">
+			<field name="loyaltyScheme" title="Scheme" type="ref" ref-obj="loyaltyScheme" list="true" sort="true" search="true"/>
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="isactive" title="Is Active" type="Boolean" form-type="checkbox" form-options="true:Active,false:Inactive"/>
+			<field name="start" title="Start Date" type="Date"/>
+			<field name="end" title="End Date" type="Date"/>
+			<field name="formula" title="Formula" type="String"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="loyaltyStatement" title="Loyalty Statement" dropdown="search" min-searchlength="1">
+			<field name="loyaltyScheme" title="Scheme" type="ref" ref-obj="loyaltyScheme" list="true" sort="true" search="true"/>
+			<field name="name" title="Name" type="String" list="true" sort="true" search="true"/>
+			<field name="description" title="Description" type="String"/>
+			<field name="code" title="Code" type="String" list="true" sort="true" search="true"/>
+			<field name="isactive" title="Is Active" type="Boolean" form-type="checkbox" form-options="true:Active,false:Inactive"/>
+			<field name="start" title="Start Date" type="Date"/>
+			<field name="end" title="End Date" type="Date"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+		<model name="loyaltyTransaction" title="Loyalty Transaction" dropdown="search" min-searchlength="1">
+			<field name="loyaltyScheme" title="Scheme" type="ref" ref-obj="loyaltyScheme" list="true" sort="true" search="true"/>
+			<field name="loyaltyStatement" title="Statement" type="ref" ref-obj="loyaltyStatement" list="true" sort="true" search="true"/>
+			<field name="loyaltyMember" title="Member" type="ref" ref-obj="loyaltyMember" list="true" sort="true" search="true"/>
+			<field name="loyaltyPoint" title="Point" type="ref" ref-obj="loyaltyPoint" list="true" sort="true" search="true"/>
+			<field name="booking" title="Booking" type="ref" ref-obj="booking" list="true" sort="true" search="true"/>
+			<field name="revenue" title="Revenue" type="ref" ref-obj="revenue" list="true" sort="true" search="true"/>
+			<field name="comments" title="Comments" type="String"/>
+			<field name="points" title="Points" type="Number"/>
+			<field name="customer" title="Customer" type="ref" ref-obj="customer"/>
+		</model>
+
+	</models>
+</app>

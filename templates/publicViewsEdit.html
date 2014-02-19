@@ -1,0 +1,39 @@
+<div class="mypanel" ng-controller="${model.camelname}sController"> 
+  <ul>
+    <div class="page-header">
+      <h1>${model.title} Details</h1>
+    </div>
+  </ul>
+  <ul>
+    <form class="form-vertical" ng-submit="update()" ng-init="findOne()"> 
+      <div class="form-group">
+        <tabset>
+
+${--repeat1:tab:tab:
+          <tab heading="${tab.title}" select="${tab.name}Selected(${model.name})">
+	${--repeat2:field:tab[@name='${tab.name}']/field:
+            <label class="control-label" for="${field.name}">${field.title}</label> 
+            <div class="controls">
+            	${field.form-control}
+            </div> 
+	--2}
+          </tab>
+--1}
+        </tabset>
+
+	${--repeat3:field:./field:
+            <label class="control-label" for="${field.name}">${field.title}</label> 
+            <div class="controls">
+            	${field.form-control}
+            </div> 
+	--3}
+      </div> 
+      <div class="form-group"> 
+        <div class="controls"> 
+          <input type="submit" class="btn btn-primary"> 
+        </div> 
+      </div> 
+    </form>
+  </ul>
+</div>
+

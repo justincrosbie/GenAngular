@@ -1,0 +1,16 @@
+<div class="mypanel" ng-controller="${model.camelname}sController" ng-init="findOne()">
+  <ul>
+    <div class="page-header">
+      <h1>View ${model.title}</h1>
+    </div>
+  </ul>
+  <ul>
+    <div  class="well well-small">
+${--repeat1:field:field:      <p>${field.title}: {{ ${model.name}.${field.name.deref} }}</p>
+--1}
+    </div>
+  </ul>
+  <ul>
+	  <a href="#!/${model.name}s">View all ${model.title}s</a>
+  </ul>
+</div>

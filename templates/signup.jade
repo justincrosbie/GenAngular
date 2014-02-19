@@ -1,0 +1,28 @@
+extends auth
+
+block auth
+  form(action="/users", method="post")
+    .form-group
+      input#accountType(type='hidden', name="accountType", value='1')
+
+    .form-group
+      label(for='name') Full name
+      input#name(type='text', name="name", placeholder='Full name', value=user.name).form-control
+
+    .form-group
+      label(for='email') Email
+      input#email(type='text', name="email", placeholder='Email', value=user.email).form-control
+
+    .form-group
+      label(for='username') Username
+      input#username(type='text', name="username", placeholder='Username', value=user.username).form-control
+
+    .form-group
+      label(for='password') Password
+      input#password(type='password', name="password", placeholder='Password').form-control
+
+    .form-group
+      button.btn.btn-primary(type='submit') Sign up
+      &nbsp;
+      | or&nbsp;
+      a.show-login(href="/signin") login

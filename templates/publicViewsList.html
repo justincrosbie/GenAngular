@@ -1,0 +1,61 @@
+<div class="mypanel" ng-controller="${model.camelname}sController" ng-init="findPaged()">
+  <ul>
+    <div class="page-header">
+      <h1>${model.title}s</h1>
+    </div>
+  </ul>
+  <ul>
+      <div class="row">
+          <div class="col-md-6">
+            <form class="form-inline" role="form" ng-submit="findPaged()">
+              <div class="form-group">
+                <label class="sr-only" for="query">Search for ${model.title}</label>
+                <input type="text" class="form-control" ng-model="query" id="query" placeholder="Enter${--repeat1:field:field[@search='true' and @type!='ref']: ${field.name}--1}">
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+          
+          ${--repeat2:field:field[@search='true' and @type='ref']:
+          <div class="col-md-2">
+              <div class="controls"> 
+                <input type="hidden" ui-select2="global.${field.ref-obj}Select" ng-model="${field.name}Search" ng-click="findPaged()"/>
+              </div> 
+          </div>--2}
+      </div>
+  </ul>
+  <ul>
+      <table class="table tablesorter table-striped table-bordered table-condensed">
+          <thead>
+            <tr>
+              ${--repeat3:field:field[@list='true' and @sort='true']:<th class="header" ng-class="sortClass.${field.name}" ng-click="changeSort('${field.name}')">${field.title}</th>
+              --3}
+              ${--repeat4:field:field[@list='true' and @sort!='true']:
+              <th>${field.title}</th>
+              --4}
+              <th/>
+              <th/>
+            </tr>
+          </thead>
+          <tr ng-repeat="${model.name} in ${model.name}s">
+            ${--repeat5:field:field[@list='true' and @sort='true']:<td><a href="#!/${model.name}s/{{ ${model.name}._id }}">{{${model.name}.${field.name.deref}}}</a></td>
+            --5}
+              ${--repeat6:field:field[@list='true' and @sort!='true']:<td>{{${model.name}.${field.name.deref}}}</td>
+            --6}
+            <td><a href="#!/${model.name}s/{{ ${model.name}._id }}/edit">Edit</a></td>
+            <td><a href="" ng-click="remove(${model.name})" >Remove</a></td>
+          </tr>
+      </table>
+  </ul>
+  <ul>
+    <pre>Total: {{totalItems}}</pre>
+  </ul>
+  <ul ng-show="totalItems > 10">
+    <pagination total-items="totalItems" page="currentPage" max-size="maxSize" class="pagination-small" 
+      boundary-links="true" rotate="false" num-pages="numPages" on-select-page="pageChanged(page)" >
+    </pagination>
+  </ul>
+  <ul>
+    <a href="#!/${model.name}s/create" class="btn btn-primary">Create a new ${model.title}</a>
+  </ul>
+</div>

@@ -1,0 +1,50 @@
+script(type='text/javascript', src='lib/jquery/jquery.min.js')
+
+script(type='text/javascript', src='lib/angular-file-upload/angular-file-upload-shim.min.js')
+script(type='text/javascript', src='lib/angular/angular.min.js')
+script(type='text/javascript', src='lib/angular-breadcrumbs/angular-breadcrumbs.js')
+	
+script(type='text/javascript', src='lib/angular-file-upload/angular-file-upload.min.js')
+script(type='text/javascript', src='lib/angular-cookies/angular-cookies.min.js')
+script(type='text/javascript', src='lib/angular-resource/angular-resource.min.js')
+script(type='text/javascript', src='lib/bootstrap/dist/js/bootstrap.js')
+script(type='text/javascript', src='lib/angular-bootstrap/ui-bootstrap-tpls.1.10.0.js')
+script(type='text/javascript', src='lib/angular-route/angular-route.min.js')
+script(type='text/javascript', src='lib/angular-animate/angular-animate.min.js')
+script(type='text/javascript', src='lib/angular-strap/dist/angular-strap.js')
+script(type='text/javascript', src='lib/bootstrap-datepicker/js/bootstrap-datepicker.js')
+//script(type='text/javascript', src='lib/selectize/dist/js/standalone/selectize.min.js')
+//script(type='text/javascript', src='lib/angular-selectize/angular-selectize.js')
+script(type='text/javascript', src='lib/select2/select2.js')
+script(type='text/javascript', src='lib/angular-ui-select2/src/select2.js')
+script(type='text/javascript', src='lib/ng-table/ng-table.js')
+
+script(type='text/javascript', src='lib/angular-sanitize/angular-sanitize.min.js')
+
+script(type='text/javascript', src='lib/videogular/videogular.js')
+script(type='text/javascript', src='lib/videogular-controls/controls.js')
+script(type='text/javascript', src='lib/videogular-overlay-play/overlay-play.js')
+script(type='text/javascript', src='lib/videogular-buffering/buffering.js')
+script(type='text/javascript', src='lib/videogular-poster/poster.js')
+
+script(type='text/javascript', src='lib/videogular-youtube/youtube.js')
+
+script(type='text/javascript', src='js/app.js')
+script(type='text/javascript', src='js/config.js')
+script(type='text/javascript', src='js/directives.js')
+script(type='text/javascript', src='js/filters.js')
+
+script(type='text/javascript', src='js/services/global.js')
+
+script(type='text/javascript', src='js/controllers/index.js')
+script(type='text/javascript', src='js/controllers/header.js')	
+script(type='text/javascript', src='js/controllers/breadcrumbs.js')
+
+script(type='text/javascript', src='js/init.js')
+
+script(type='text/javascript', src='js/services/AWS.js')
+
+${--repeat1:model:model:
+script(type='text/javascript', src='js/controllers/${model.name}s.js')
+script(type='text/javascript', src='js/services/${model.name}s.js')
+--1}
